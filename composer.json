@@ -1,0 +1,16 @@
+{
+    "name": "matt/demo",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/",
+            "App\\Controllers\\": "src/controllers/"
+        }
+    },
+    "authors": [
+        {
+            "name": "matt",
+            "email": "mattcoding45@gmail.com"
+        }
+    ],
+    "require": {}
+}
