@@ -13,9 +13,9 @@ class Router {
   }
 
   protected function extractParams($url, $rule) {
-    $params = [];
-    $urlParts = explode('/', trim($url, '/'));
-    $ruleParts = explode('/', trim($rule, '/'));
+    (array) $params = [];
+    (array) $urlParts = explode('/', trim($url, '/'));
+    (array) $ruleParts = explode('/', trim($rule, '/'));
 
     foreach ($ruleParts as $index => $rulePart) {
       if (strpos($rulePart, ':') === 0 && isset($urlParts[$index])) {
@@ -28,8 +28,8 @@ class Router {
   }
 
   protected function matchRule($url, $rule) {
-    $urlParts = explode('/', trim($url, '/'));
-    $ruleParts = explode('/', trim($rule, '/'));
+    (array) $urlParts = explode('/', trim($url, '/'));
+    (array) $ruleParts = explode('/', trim($rule, '/'));
 
     if (count($urlParts) !== count($ruleParts)) {
       return false;
@@ -45,12 +45,12 @@ class Router {
   }
 
   protected function run() {
-    $is404 = true;
-    $url = parse_url($this->url, PHP_URL_PATH);
+    (bool) $is404 = true;
+    (string) $url = parse_url($this->url, PHP_URL_PATH);
 
     foreach ($this->routes as $route => $controller) {
       if ($this->matchRule($url, $route)) {
-        $params = $this->extractParams($url, $route);
+        (array) $params = $this->extractParams($url, $route);
         new $controller($params);
 
         $is404 = false;
@@ -62,7 +62,7 @@ class Router {
     if ($is404) {
       header('Access-Control-Allow-Origin: *');
       header('Content-type: application/json; charset=utf-8');
-      http_response_code(404);
+      header('HTTP/1.0 404 Not Found');
 
       echo json_encode([
         'code' => '404',

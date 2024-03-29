@@ -2,20 +2,35 @@
 
 namespace App\Controllers;
 
+use App\Models\MessagesModel;
+
 class Messages {
   protected array $params;
   protected string $reqMethod;
+  protected object $model;
 
   public function __construct($params) {
     $this->params = $params;
     $this->reqMethod = strtolower($_SERVER['REQUEST_METHOD']);
+    $this->model = new MessagesModel();
 
     $this->run();
   }
 
-  protected function run() {
-    $this->header();
-    $this->ifMethodExist();
+  public function postMessages() {
+    $body = (array) json_decode(file_get_contents('php://input'));
+
+    $this->model->add($body);
+
+    return $this->model->getLast();
+  }
+
+  public function deleteMessages() {
+    return $this->model->delete(intval($this->params['id']));
+  }
+
+  public function getMessages() {
+    return $this->model->get(intval($this->params['id']));
   }
 
   protected function header() {
@@ -27,29 +42,22 @@ class Messages {
     $method = $this->reqMethod.'Messages';
 
     if (method_exists($this, $method)) {
-        echo json_encode($this->$method());
-        return;
+      echo json_encode($this->$method());
+
+      return;
     }
 
-    http_response_code(404);
+    header('HTTP/1.0 404 Not Found');
     echo json_encode([
-        'code' => '404',
-        'message' => 'Not Found'
+      'code' => '404',
+      'message' => 'Not Found'
     ]);
 
     return;
-}
+  }
 
-public function getMessages() {
-  // Réponses aux différents mots-clés
-  $responses = [
-      "bonjour" => "Bonjour à tous",
-      "pierre" => "Pierre est le leader de l'arène d'Argenta !",
-      "ondine" => "Ondine dirige l'arène d'Azuria.",
-      "majorBob" => "Tu dois te rendre à Carmin sur Mer !"
-  ];
-
-  return $responses;
-}
-
+  protected function run() {
+    $this->header();
+    $this->ifMethodExist();
+  }
 }

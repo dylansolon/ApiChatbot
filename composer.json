@@ -1,9 +1,9 @@
 {
-    "name": "matt/demo",
     "autoload": {
         "psr-4": {
             "App\\": "src/",
-            "App\\Controllers\\": "src/controllers/"
+            "App\\Controllers\\": "src/controllers/",
+            "App\\Models\\": "src/models/"
         }
     },
     "authors": [
