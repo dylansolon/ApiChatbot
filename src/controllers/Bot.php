@@ -22,8 +22,14 @@ class Bot {
     );
 
     public function __construct($params) {
+        $this->header();
         $id = $params['id'];
         echo $this->displayBotInfo($this->getBot($id));
+    }
+
+    protected function header() {
+        header('Access-Control-Allow-Origin: *');
+        header('Content-type: application/json; charset=utf-8');
     }
 
     private function getBot($id) {
