@@ -17,17 +17,17 @@ class Bots {
         $bots = [
             [
                 'id' => 1,
-                'nom' => 'Bulbizarre',
+                'name' => 'Bulbizarre',
                 'avatar' => 'http://localhost:81/bulbizarre.png'
             ],
             [
                 'id' => 2,
-                'nom' => 'Salamèche',
+                'name' => 'Salamèche',
                 'avatar' => 'http://localhost:81/salameche.png'
             ],
             [
                 'id' => 3,
-                'nom' => 'Carapuce',
+                'name' => 'Carapuce',
                 'avatar' => 'http://localhost:81/carapuce.png'
             ]
         ];
