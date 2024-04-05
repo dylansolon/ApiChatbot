@@ -9,7 +9,7 @@ class MessagesModel extends SqlConnect {
     public function add(array $data) {
       $query = "
         INSERT INTO messages (id, botId, userId, text, date)
-        VALUES (:id, :botId, :userId, :text, NOW())
+        VALUES (:id, :botId, :userId, :text, :date)
       ";
 
       $req = $this->db->prepare($query);

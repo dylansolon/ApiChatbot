@@ -21,15 +21,30 @@ class Messages {
     return $this->model->getAll();
   }
 
+  public function postMessages() {
+    $body = (array) json_decode(file_get_contents('php://input'));
+
+    $this->model->add($body);
+
+    return $this->model->getLast();
+  }
+
   protected function header() {
     header('Access-Control-Allow-Origin: *');
+    header('Access-Control-Allow-Headers : Content-Type');
+    header('Access-Control-Allow-Methods : PUT, DELETE, PATCH, POST, OPTIONS');
     header('Content-type: application/json; charset=utf-8');
+    if ($this->reqMethod === "options") {
+      header('Access-Control-Max-Age : 86400');
+      exit;
+    }
   }
 
   protected function ifMethodExist() {
     $method = $this->reqMethod.'Messages';
 
     if (method_exists($this, $method)) {
+      header("HTTP/1.0 200 OK");
       echo json_encode($this->$method());
 
       return;
