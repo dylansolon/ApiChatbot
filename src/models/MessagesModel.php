@@ -5,11 +5,11 @@ namespace App\Models;
 use \PDO;
 use stdClass;
 
-class MessageModel extends SqlConnect {
+class MessagesModel extends SqlConnect {
     public function add(array $data) {
       $query = "
-        INSERT INTO messages (first_name, last_name, promo, school)
-        VALUES (:firstname, :lastname, :promo, :school)
+        INSERT INTO messages (id, botId, userId, text, date)
+        VALUES (:id, :botId, :userId, :text, NOW())
       ";
 
       $req = $this->db->prepare($query);

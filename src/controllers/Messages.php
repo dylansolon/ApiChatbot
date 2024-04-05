@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Models\MessageModel;
+use App\Models\MessagesModel;
 
 class Messages {
   protected array $params;
@@ -12,7 +12,7 @@ class Messages {
   public function __construct($params) {
     $this->params = $params;
     $this->reqMethod = strtolower($_SERVER['REQUEST_METHOD']);
-    $this->model = new MessageModel();
+    $this->model = new MessagesModel();
 
     $this->run();
   }

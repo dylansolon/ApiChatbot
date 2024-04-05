@@ -2,13 +2,12 @@
 
 namespace App\Controllers;
 
+function hello() {
+  return 'hello';
+};
+
 class Reponses {
-    private $messages = array(
-        1 => "Bonjour à tous.",
-        2 => "Pierre est le leader de l'arène d'Argenta !",
-        3 => "Ondine dirige l'arène d'Azuria.",
-        4 => "Tu dois te rendre à Carmin sur Mer !"
-    );
+    private $messages = hello();
 
     public function __construct($params) {
         $this->header();
