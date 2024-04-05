@@ -6,15 +6,14 @@ use \PDO;
 use stdClass;
 
 class MessagesModel extends SqlConnect {
-    public function add(array $data) {
-      $query = "
-        INSERT INTO messages (id, botId, userId, text, date)
-        VALUES (:id, :botId, :userId, :text, :date)
-      ";
-
-      $req = $this->db->prepare($query);
-      $req->execute($data);
-    }
+  public function add(array $data) {
+    $query = "
+        INSERT INTO messages (botId, userId, text)
+        VALUES (:botId, :userId, :text)
+    ";
+    $req = $this->db->prepare($query);
+    $req->execute($data);
+  }
 
     public function delete(int $id) {
       $req = $this->db->prepare("DELETE FROM messages WHERE id = :id");

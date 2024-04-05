@@ -44,7 +44,7 @@ class Messages {
     $method = $this->reqMethod.'Messages';
 
     if (method_exists($this, $method)) {
-      header("HTTP/1.0 200 OK");
+      header('HTTP/1.0 200 OK');
       echo json_encode($this->$method());
 
       return;
