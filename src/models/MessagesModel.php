@@ -8,8 +8,8 @@ use stdClass;
 class MessagesModel extends SqlConnect {
   public function add(array $data) {
     $query = "
-        INSERT INTO messages (botId, userId, text)
-        VALUES (:botId, :userId, :text)
+        INSERT INTO messages (botId, botName, userId, text)
+        VALUES (:botId, :botName, :userId, :text)
     ";
     $req = $this->db->prepare($query);
     $req->execute($data);

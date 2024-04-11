@@ -2,8 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Models\BotsModel;
-
 class Bots {
     protected array $params;
     protected string $reqMethod;
@@ -11,14 +9,51 @@ class Bots {
     public function __construct($params) {
         $this->params = $params;
         $this->reqMethod = strtolower($_SERVER['REQUEST_METHOD']);
-        $this->model = new BotsModel();
 
         $this->run();
     }
 
     public function getBots() {
-      return $this->model->getAllBots();
-       }
+      $bots = [
+          [
+          'id' => 3,
+          'name' => 'Salameche',
+          'avatar' => 'http://localhost:81/salameche.png',
+          'actions' => [
+            [
+                'words' => ['hello'],
+                'response' => 'hello'
+            ]
+        ]
+      ],
+        [
+        'id' => 4,
+        'name' => 'Bulbizarre',
+        'avatar' => 'http://localhost:81/bulbizarre.png',
+        'actions' => [
+          [
+              'words' => ['hello'],
+              'response' => 'hola'
+          ]
+      ]
+    ],
+        [
+            'id' => 5,
+            'name' => 'Carapuce',
+            'avatar' => 'http://localhost:81/carapuce.png',
+            'actions' => [
+              [
+                  'words' => ['hello'],
+                  'response' => 'bonjour'
+              ]
+          ]
+              ],
+    ];
+    
+      
+      return $bots;
+  }
+  
 
     protected function header() {
         header('Access-Control-Allow-Origin: *');

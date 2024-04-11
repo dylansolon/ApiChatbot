@@ -35,6 +35,11 @@ class Reponses {
     }
   }
 
+  public function hello() {
+    $response = "Bip Bop, bonjour humain !";
+    echo $response;
+  }  
+
   protected function header() {
     header('Access-Control-Allow-Origin: *');
     header('Content-type: application/json; charset=utf-8');
