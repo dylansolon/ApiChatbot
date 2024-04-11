@@ -15,7 +15,6 @@ class Reponses {
 
   public function getReponse() {
     $reponses = [
-        1 => "Bip Bop, bonjour humain !", // bonjour
         2 => "help blabla commande", // help
         3 => "Pokemon est sortie le 27 Février 1996.", // date
         4 => "La première région de Pokemon est Kanto !", // region
