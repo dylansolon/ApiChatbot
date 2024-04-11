@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Models\BotsModel;
+
 class Bots {
     protected array $params;
     protected string $reqMethod;
@@ -9,31 +11,14 @@ class Bots {
     public function __construct($params) {
         $this->params = $params;
         $this->reqMethod = strtolower($_SERVER['REQUEST_METHOD']);
+        $this->model = new BotsModel();
 
         $this->run();
     }
 
-    protected function getBots() {
-        $bots = [
-            [
-                'id' => 1,
-                'name' => 'Bulbizarre',
-                'avatar' => 'http://localhost:81/bulbizarre.png'
-            ],
-            [
-                'id' => 2,
-                'name' => 'Salamèche',
-                'avatar' => 'http://localhost:81/salameche.png'
-            ],
-            [
-                'id' => 3,
-                'name' => 'Carapuce',
-                'avatar' => 'http://localhost:81/carapuce.png'
-            ]
-        ];
-
-        return $bots;
-    }
+    public function getBots() {
+      return $this->model->getAllBots();
+       }
 
     protected function header() {
         header('Access-Control-Allow-Origin: *');
@@ -41,20 +26,22 @@ class Bots {
     }
 
     protected function ifMethodExist() {
-        $method = $this->reqMethod.'Bots';
-
-        if (method_exists($this, $method)) {
-            echo json_encode($this->$method());
-
-            return;
-        }
-
-        echo json_encode([
-            'code' => '404',
-            'message' => 'Not Found'
-        ]);
-
+      $method = $this->reqMethod.'Bots';
+  
+      if (method_exists($this, $method)) {
+        header('HTTP/1.0 200 OK');
+        echo json_encode($this->$method());
+  
         return;
+      }
+  
+      header('HTTP/1.0 404 Not Found');
+      echo json_encode([
+        'code' => '404',
+        'message' => 'Not Found'
+      ]);
+  
+      return;
     }
 
     protected function run() {

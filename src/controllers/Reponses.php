@@ -13,7 +13,7 @@ class Reponses {
     $this->run();
   }
 
-  public function getReponseById() {
+  public function getReponse() {
     $reponses = [
         1 => "Bip Bop, bonjour humain !", // bonjour
         2 => "help blabla commande", // help
@@ -41,7 +41,7 @@ class Reponses {
   }
 
   protected function ifMethodExist() {
-    $method = 'getReponseById';
+    $method = $this->reqMethod.'Reponse';
 
     if (method_exists($this, $method)) {
       $response = $this->$method();

@@ -24,7 +24,7 @@ class Messages {
   public function postMessages() {
     $body = (array) json_decode(file_get_contents('php://input'));
 
-    $this->model->add($body);
+    return $this->model->add($body);
 
     return $this->model->getLast();
   }

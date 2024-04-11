@@ -24,8 +24,14 @@ class MessagesModel extends SqlConnect {
       $req = $this->db->prepare("SELECT * FROM messages");
       $req->execute();
 
-      return $req->rowCount() > 0 ? $req->fetch(PDO::FETCH_ASSOC) : new stdClass();
-    }
+      $result = $req->fetchAll(PDO::FETCH_ASSOC);
+  
+      if ($result) {
+          return $result;
+      } else {
+          return array();
+      }
+  }
 
     public function get(int $id) {
       $req = $this->db->prepare("SELECT * FROM messages WHERE id = :id");
