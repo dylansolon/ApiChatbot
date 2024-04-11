@@ -13,5 +13,4 @@ new Router([
     'bots' => Bots::class,
     'messages' => Messages::class,
     'reponses/:id' => Reponses::class
-
 ]);
